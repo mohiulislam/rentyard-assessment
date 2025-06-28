@@ -81,13 +81,12 @@ const Page_1 = () => {
                 <label className="font-fustat font-semibold text-base text-[#272B35]">
                   Ownership doc*
                 </label>
-                <div className="flex justify-center items-center p-3 border border-dashed border-[#E0E0E0] rounded-lg bg-[#F6F6F6] h-12">
-                  <div className="flex items-center gap-2.5">
-                    <FiUpload className="text-[#272B35]" size={20} />
-                    <span className="font-fustat font-semibold text-sm text-[#6F6C6A]">
-                      (Pdf only)
-                    </span>
-                  </div>
+                {/* Adjusted the width and alignment here */}
+                <div className="flex items-center px-4 gap-2.5 w-[405px] h-12 border border-dashed border-[#E0E0E0] rounded-lg bg-[#F6F6F6]">
+                  <FiUpload className="text-[#272B35]" size={20} />
+                  <span className="font-fustat font-semibold text-sm text-[#6F6C6A]">
+                    (Pdf only)
+                  </span>
                 </div>
               </div>
             </div>
