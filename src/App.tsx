@@ -1,7 +1,9 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "./App.css";
 import Layout from "./layouts/Layout";
-import Page_1 from "./pages/Page_1";
+import AddPropertyPage from "./pages/AddPropertyPage";
+import CondoInfoPage from "./pages/CondoInfoPage";
+
 
 function App() {
   return (
@@ -9,7 +11,8 @@ function App() {
       <div className="min-h-screen w-full bg-gray-50">
         <Routes>
           <Route path="/" element={<Layout />}>
-            <Route path="/" element={<Page_1 />} />
+            <Route path="/" element={<AddPropertyPage />} />
+            <Route path="/condo-info" element={<CondoInfoPage/>} />
           </Route>
         </Routes>
       </div>

@@ -2,7 +2,7 @@ import React from "react";
 import { Outlet } from "react-router-dom";
 import logo from "../assets/imgs/logo.png"; // Assuming path to your logo
 
-export default function Layout({ children }) {
+export default function Layout() {
   return (
     <div className="flex flex-col min-h-screen bg-white">
       {/* 1. Header */}
@@ -14,13 +14,13 @@ export default function Layout({ children }) {
           w-full
         "
       >
-        {/* All horizontal padding (px-*) has been removed */}
         <div
           className="
             mx-auto
             max-w-[1440px]
             h-full
             flex items-center justify-between
+            px-4 sm:px-6 md:px-8
           "
         >
           <img
@@ -58,9 +58,8 @@ export default function Layout({ children }) {
 
       {/* 2. Main Content */}
       <main className="w-full flex-grow">
-        {/* All horizontal padding (px-*) has been removed */}
-        <div className="max-w-[1440px] mx-auto">
-          {children || <Outlet />}
+        <div className="max-w-[1440px] mx-auto px-4 sm:px-6 md:px-8">
+          <Outlet />
         </div>
       </main>
 
@@ -72,11 +71,11 @@ export default function Layout({ children }) {
         "
         style={{ boxShadow: "0px 4px 30px rgba(46, 45, 116, 0.05)" }}
       >
-        {/* All horizontal padding (px-*) has been removed */}
         <div
           className="
             max-w-[1440px] h-full mx-auto
             flex items-center justify-between
+            px-4 sm:px-6 md:px-8
           "
         >
           <button className="font-fustat font-semibold text-base underline text-[#272B35] hover:text-blue-600 transition-colors">
