@@ -20,7 +20,6 @@ const ChargesForm: FC = () => {
         value="100"
         options={applicantOptions}
         initialOption="All 18+ applicant"
-        isEditable={true} // The component's default behavior
       />
 
       <FormField label="Admin fee(one-time)*" value="15" />

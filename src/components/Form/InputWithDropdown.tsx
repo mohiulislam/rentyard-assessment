@@ -6,7 +6,6 @@ interface InputWithDropdownProps {
   value: string;
   options: string[];
   initialOption: string;
-  isEditable: boolean;
 }
 
 const InputWithDropdown: FC<InputWithDropdownProps> = ({
@@ -14,7 +13,6 @@ const InputWithDropdown: FC<InputWithDropdownProps> = ({
   value,
   options,
   initialOption,
-  isEditable,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedOption, setSelectedOption] = useState(initialOption);
@@ -38,30 +36,23 @@ const InputWithDropdown: FC<InputWithDropdownProps> = ({
       <label className="font-fustat font-semibold text-base text-[#272B35]">
         {label}
       </label>
-      <div className="flex items-center h-12 border border-[#E0E0E0] rounded-xl">
-        {/* Left Side: Input or Static Text */}
-        <div className="flex-grow h-full px-4 flex items-center">
-          {isEditable ? (
-            <input
-              type="text"
-              defaultValue={value}
-              className="w-full h-full bg-transparent outline-none focus:ring-0 border-none font-fustat font-semibold text-[#6F6C6A]"
-            />
-          ) : (
-            <span className="font-fustat font-semibold text-[#6F6C6A]">
-              {value}
-            </span>
-          )}
+      {/* The focus styles are applied to this main container div */}
+      <div className="flex items-center h-12 border border-[#E0E0E0] rounded-xl px-4 transition-all duration-200 focus-within:border-blue-500 focus-within:ring-2 focus-within:ring-blue-500/30">
+        {/* Left Side: Always renders an editable input */}
+        <div className="flex-grow h-full flex items-center">
+          <input
+            type="text"
+            defaultValue={value}
+            className="w-full h-full bg-transparent outline-none focus:ring-0 border-none font-fustat font-semibold text-[#6F6C6A]"
+          />
         </div>
 
-        {/* CORRECTED: The vertical divider div has been completely removed. */}
-
-        {/* Right Side: Dropdown Button */}
+        {/* Right Side: The dropdown selector */}
         <div className="relative flex-shrink-0" ref={dropdownRef}>
           <button
             type="button"
             onClick={() => setIsOpen(!isOpen)}
-            className="flex items-center justify-between gap-2 px-4 h-12"
+            className="flex items-center justify-between gap-2 h-12 pl-2"
           >
             <span className="font-fustat font-semibold text-base text-[#6F6C6A] whitespace-nowrap">
               {selectedOption}
