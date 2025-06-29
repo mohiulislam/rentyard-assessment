@@ -65,7 +65,7 @@ const PricingPage: FC = () => {
   const addCardModalFooter = (
     <div className="flex justify-end">
       <button
-        className="px-8 py-3 bg-[#316EED] text-white font-bold rounded-xl hover:bg-[#2557D6]"
+        className="px-6 py-2 sm:px-8 sm:py-3 bg-[#316EED] text-white font-bold rounded-xl hover:bg-[#2557D6] transition-colors"
         style={{ backgroundColor: "#316EED", borderRadius: "12px" }}
       >
         Save
@@ -75,10 +75,13 @@ const PricingPage: FC = () => {
 
   return (
     <>
-      <div className="py-12 px-4 sm:px-6">
-        <div className="w-full flex flex-col gap-8">
-          <section className="flex flex-col items-start gap-6">
-            <h1 className="text-[24px] font-bold" style={{ color: "#272B35" }}>
+      <div className="py-8 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+        <div className="w-full flex flex-col gap-6 sm:gap-8">
+          <section className="flex flex-col items-start gap-4 sm:gap-6">
+            <h1
+              className="text-xl sm:text-2xl lg:text-3xl font-bold"
+              style={{ color: "#272B35" }}
+            >
               Choose a plan for after 30-days free trial
             </h1>
             <PricingToggle
@@ -86,7 +89,7 @@ const PricingPage: FC = () => {
               onToggle={setBillingCycle}
             />
           </section>
-          <section className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
             {plans.map((plan) => (
               <PricingCard
                 key={plan.name}
@@ -113,15 +116,18 @@ const PricingPage: FC = () => {
               style={{ border: "none" }}
             >
               <div
-                className="flex justify-between items-center px-4 py-2 pb-[10px]"
+                className="flex flex-col sm:flex-row justify-between items-start sm:items-center px-4 py-2 sm:py-3"
                 style={{ border: "0px solid #F0F1F3" }}
               >
-                <h2 className="text-xl font-bold" style={{ color: "#272B35" }}>
+                <h2
+                  className="text-lg sm:text-xl font-bold"
+                  style={{ color: "#272B35" }}
+                >
                   Payment option
                 </h2>
                 <button
                   onClick={openCardModal}
-                  className="text-base font-semibold underline"
+                  className="text-sm sm:text-base font-semibold underline mt-2 sm:mt-0"
                   style={{ color: "#316EED" }}
                 >
                   Add new card
@@ -135,7 +141,7 @@ const PricingPage: FC = () => {
                     isSelected={selectedPaymentId === method.id}
                     onSelect={() => setSelectedPaymentId(method.id)}
                     className={`
-                      rounded-[12px]
+                      rounded-[12px] text-sm sm:text-base
                       ${
                         selectedPaymentId === method.id
                           ? "bg-[#316EED] text-white"
@@ -154,7 +160,7 @@ const PricingPage: FC = () => {
         onClose={closeCardModal}
         title="Add new card"
         footer={addCardModalFooter}
-        className="rounded-[10px]"
+        className="rounded-[10px] w-full max-w-md sm:max-w-lg"
       >
         <AddNewCardForm />
       </Modal>

@@ -21,20 +21,20 @@ const PricingCard: FC<PricingCardProps> = ({
   className = "",
 }) => {
   const containerClasses = `
-    p-6 border rounded-[10px] cursor-pointer transition-all duration-300
+    p-4 sm:p-6 border rounded-[10px] cursor-pointer transition-all duration-300
     ${
       isSelected
         ? "border-[1.5px] border-[#316EED] bg-[#F5F8FF]"
         : "border-[#D8D8D8] bg-white hover:border-gray-400"
     }
-    ${className}  // ✅ Allow custom class from props
+    ${className}
   `;
 
   return (
     <div className={containerClasses} onClick={onSelect}>
-      <div className="flex justify-between items-center mb-6">
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-4 sm:mb-6">
         <div
-          className={`py-3 px-4 rounded-md text-xl font-bold ${
+          className={`py-2 px-3 sm:py-3 sm:px-4 rounded-md text-lg sm:text-xl font-bold ${
             isSelected ? "bg-transparent" : "bg-[#F4F4F4]"
           }`}
         >
@@ -42,23 +42,25 @@ const PricingCard: FC<PricingCardProps> = ({
         </div>
         {hasAutoPay && (
           <button
-            className={`flex items-center gap-2 text-base font-bold transition-colors ${
+            className={`flex items-center gap-2 text-sm sm:text-base font-bold transition-colors mt-2 sm:mt-0 ${
               isSelected ? "text-blue-600" : "text-gray-500"
             }`}
           >
             <FiCheckSquare
               className={isSelected ? "text-blue-600" : "text-gray-400"}
-              size={24}
+              size={20}
             />
             Auto Pay
           </button>
         )}
       </div>
       <div className="mb-2">
-        <span className="text-5xl font-bold text-gray-900">${price}</span>
-        <span className="text-lg text-gray-500">/mo</span>
+        <span className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900">
+          ${price}
+        </span>
+        <span className="text-sm sm:text-lg text-gray-500">/mo</span>
       </div>
-      <p className="text-base text-[#4C4A54]">{description}</p>
+      <p className="text-sm sm:text-base text-[#4C4A54]">{description}</p>
     </div>
   );
 };
