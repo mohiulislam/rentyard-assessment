@@ -7,6 +7,7 @@ import PricingCard from "../components/pricing/PricingCard";
 import Modal from "../components/Modal";
 import AddNewCardForm from "../components/forms/AddNewCardForm";
 import PaymentMethodRow from "../components/PaymentMethodRow";
+
 const plans = [
   {
     name: "Regular",
@@ -17,32 +18,34 @@ const plans = [
   { name: "Enterprise", price: { monthly: 199.99, annually: 85.99 } },
 ];
 
-// 1. Added a 'charge' property to each payment method for our calculation
 const paymentMethods = [
-  { id: 1, info: "Alex jones(Amex card) ************8565", charge: 3.50 },
+  { id: 1, info: "Alex jones(Amex card) ************8565", charge: 3.5 },
   { id: 2, info: "Alex jones(Visa card) ************4242", charge: 2.25 },
-  { id: 3, info: "Alex jones(Debit card) ************1234", charge: 0.00 },
+  { id: 3, info: "Alex jones(Debit card) ************1234", charge: 0.0 },
 ];
 
 const PricingPage: FC = () => {
   const navigate = useNavigate();
   const { setFooterActions } = useFooter();
 
-  const [billingCycle, setBillingCycle] = useState<"monthly" | "annually">("monthly");
+  const [billingCycle, setBillingCycle] = useState<"monthly" | "annually">(
+    "monthly"
+  );
   const [selectedPlan, setSelectedPlan] = useState<string>("Regular");
   const [selectedPaymentId, setSelectedPaymentId] = useState<number>(1);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  // 2. Updated the 'total' calculation to include the selected card's charge
   const total = useMemo(() => {
     const plan = plans.find((p) => p.name === selectedPlan);
-    const paymentMethod = paymentMethods.find(pm => pm.id === selectedPaymentId);
+    const paymentMethod = paymentMethods.find(
+      (pm) => pm.id === selectedPaymentId
+    );
 
     const basePrice = plan ? plan.price[billingCycle] : 0;
     const cardCharge = paymentMethod ? paymentMethod.charge : 0;
 
     return basePrice + cardCharge;
-  }, [selectedPlan, billingCycle, selectedPaymentId]); // 3. Added 'selectedPaymentId' as a dependency
+  }, [selectedPlan, billingCycle, selectedPaymentId]);
 
   const openCardModal = () => setIsModalOpen(true);
   const closeCardModal = () => setIsModalOpen(false);
@@ -51,7 +54,7 @@ const PricingPage: FC = () => {
     setFooterActions(
       <PaymentFooter
         total={total}
-        onBack={() => navigate("/add-property-info")}
+        onBack={() => navigate("/property-details")}
         onPay={() => alert(`Processing payment of $${total.toFixed(2)}`)}
       />
     );
@@ -60,7 +63,10 @@ const PricingPage: FC = () => {
 
   const addCardModalFooter = (
     <div className="flex justify-end">
-      <button className="px-8 py-3 bg-[#316EED] text-white font-bold rounded-xl hover:bg-blue-700">
+      <button
+        className="px-8 py-3 bg-[#316EED] text-white font-bold rounded-xl hover:bg-[#2557D6]"
+        style={{ backgroundColor: "#316EED", borderRadius: "12px" }}
+      >
         Save
       </button>
     </div>
@@ -68,10 +74,10 @@ const PricingPage: FC = () => {
 
   return (
     <>
-      <div className="py-12">
-        <div className="max-w-6xl mx-auto flex flex-col gap-10">
+      <div className="py-12 px-4 sm:px-6">
+        <div className="w-full flex flex-col gap-8">
           <section className="flex flex-col items-start gap-6">
-            <h1 className="text-[24px] font-bold text-gray-900">
+            <h1 className="text-[24px] font-bold" style={{ color: "#272B35" }}>
               Choose a plan for after 30-days free trial
             </h1>
             <PricingToggle
@@ -89,29 +95,52 @@ const PricingPage: FC = () => {
                 isSelected={selectedPlan === plan.name}
                 hasAutoPay={plan.hasAutoPay}
                 onSelect={() => setSelectedPlan(plan.name)}
+                className={`
+                  rounded-[10px] shadow-[0_4px_30px_rgba(46,45,116,0.05)]
+                  ${
+                    selectedPlan === plan.name
+                      ? "border-[1.5px] border-[#316EED] bg-[#F5F8FF]"
+                      : "border border-[#D8D8D8] bg-white"
+                  }
+                `}
               />
             ))}
           </section>
           <section>
-            <div className="bg-white p-6 rounded-2xl shadow-sm border border-gray-200">
-              <div className="flex justify-between items-center mb-2">
-                <h2 className="text-xl font-bold text-gray-800">
+            <div
+              className="bg-white rounded-lg shadow-[0_4px_30px_rgba(46,45,116,0.05)]"
+              style={{ border: "none" }}
+            >
+              <div
+                className="flex justify-between items-center px-4 py-2 pb-[10px]"
+                style={{ border: "0px solid #F0F1F3" }}
+              >
+                <h2 className="text-xl font-bold" style={{ color: "#272B35" }}>
                   Payment option
                 </h2>
                 <button
                   onClick={openCardModal}
-                  className="text-sm font-semibold text-blue-600 hover:underline"
+                  className="text-base font-semibold underline"
+                  style={{ color: "#316EED" }}
                 >
                   Add new card
                 </button>
               </div>
-              <div>
+              <div className="px-4 pb-6">
                 {paymentMethods.map((method) => (
                   <PaymentMethodRow
                     key={method.id}
                     cardInfo={method.info}
                     isSelected={selectedPaymentId === method.id}
                     onSelect={() => setSelectedPaymentId(method.id)}
+                    className={`
+                      rounded-[12px]
+                      ${
+                        selectedPaymentId === method.id
+                          ? "bg-[#316EED] text-white"
+                          : "border border-[#316EED] text-[#316EED]"
+                      }
+                    `}
                   />
                 ))}
               </div>
@@ -124,6 +153,7 @@ const PricingPage: FC = () => {
         onClose={closeCardModal}
         title="Add new card"
         footer={addCardModalFooter}
+        className="rounded-[10px]"
       >
         <AddNewCardForm />
       </Modal>
