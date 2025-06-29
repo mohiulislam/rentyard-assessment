@@ -5,7 +5,7 @@ interface PaymentMethodRowProps {
   cardInfo: string;
   isSelected: boolean;
   onSelect: () => void;
-  className?: string; // ✅ Added className prop
+  className?: string;
 }
 
 const PaymentMethodRow: FC<PaymentMethodRowProps> = ({
@@ -21,7 +21,6 @@ const PaymentMethodRow: FC<PaymentMethodRowProps> = ({
     <div
       className={`
         flex justify-between items-center py-4 border-b border-gray-200 last:border-b-0
-
       `}
     >
       <div className="flex items-center gap-4">
@@ -30,7 +29,10 @@ const PaymentMethodRow: FC<PaymentMethodRowProps> = ({
       </div>
       <button
         onClick={onSelect}
-        className={`w-24 px-4 py-2 text-sm font-semibold rounded-lg transition-colors border ${buttonClasses}`}
+        className={`
+          min-w-[6rem] px-4 py-2 text-sm font-semibold rounded-lg transition-colors border text-center
+          ${buttonClasses}
+        `}
       >
         {isSelected ? "Selected" : "Select"}
       </button>
