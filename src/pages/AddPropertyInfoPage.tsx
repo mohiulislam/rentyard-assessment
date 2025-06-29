@@ -1,4 +1,6 @@
-import React, { FC, useState } from "react";
+import React, { FC, useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { useFooter } from "../context/FooterContext";
 
 // Icons
 import { FiInfo } from "react-icons/fi";
@@ -8,8 +10,10 @@ import InfoRow from "../components/InfoRow";
 import PropertyGallery from "../components/PropertyGallery";
 import CollapsibleSection from "../components/CollapsibleSection";
 import Modal from "../components/Modal";
+import VideoUpload from "../components/Form/VideoUpload";
+import { ActionFooter } from "../components/footers/PageFooters";
 
-// Form Components for Modals
+// Form Components
 import PropertyAddressForm from "../components/forms/PropertyAddressForm";
 import LeasingInfoForm from "../components/forms/LeasingInfoForm";
 import ChargesForm from "../components/forms/ChargesForm";
@@ -17,15 +21,33 @@ import RentFrequencyForm from "../components/forms/RentFrequencyForm";
 import ApplicationAgreementForm from "../components/forms/ApplicationAgreementForm";
 import AboutPropertyForm from "../components/forms/AboutPropertyForm";
 import AmenityForm from "../components/forms/AmenityForm";
+import PetFeesForm from "../components/forms/PetFeesForm";
+import ParkingForm from "../components/forms/ParkingForm";
+import EducationForm from "../components/forms/EducationForm";
+import StationsForm from "../components/forms/StationsForm";
+import LandmarkForm from "../components/forms/LandmarkForm";
+import UtilitiesForm from "../components/forms/UtilitiesForm";
 
 const AddPropertyInfoPage: FC = () => {
-  // State to manage modal visibility, title, and content
+  const navigate = useNavigate();
+  const { setFooterContent } = useFooter();
+
+  useEffect(() => {
+    setFooterContent(
+      <ActionFooter
+        onBack={() => navigate("/")}
+        onNext={() => navigate("/pricing")}
+        nextText="Next"
+      />
+    );
+    return () => setFooterContent(null);
+  }, [setFooterContent, navigate]);
+
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalTitle, setModalTitle] = useState("");
   const [modalContent, setModalContent] = useState<React.ReactNode>(null);
   const [modalFooter, setModalFooter] = useState<React.ReactNode>(null);
 
-  // Function to open the modal with specific content and an optional custom footer
   const openModal = (
     title: string,
     content: React.ReactNode,
@@ -37,12 +59,10 @@ const AddPropertyInfoPage: FC = () => {
     setIsModalOpen(true);
   };
 
-  // Function to close the modal
   const closeModal = () => {
     setIsModalOpen(false);
   };
 
-  // Custom footer for the 'Charges' modal
   const chargesModalFooter = (
     <div className="flex justify-between items-center">
       <div className="flex items-center gap-2">
@@ -63,9 +83,7 @@ const AddPropertyInfoPage: FC = () => {
         <h1 className="font-fustat font-bold text-2xl leading-[34px] text-[#272B35]">
           Add Property Information
         </h1>
-
         <section className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-          {/* Left Column */}
           <div className="flex flex-col gap-4">
             <InfoRow
               label="Property address"
@@ -121,51 +139,53 @@ const AddPropertyInfoPage: FC = () => {
               }
             />
           </div>
-
-          {/* Right Column */}
           <div className="flex flex-col gap-4">
             <InfoRow
               label="Pet fees"
               status="Optional"
-              onAdd={() => alert("Open Pet Fees Modal")}
+              onAdd={() => openModal("Pet fees", <PetFeesForm />)}
             />
             <InfoRow
               label="Parking"
               status="Optional"
-              onAdd={() => alert("Open Parking Modal")}
+              onAdd={() => openModal("Parking", <ParkingForm />)}
             />
             <InfoRow
               label="Nearest educational institution"
               status="Recommended"
-              onAdd={() => alert("Open Education Modal")}
+              onAdd={() =>
+                openModal(
+                  "Add nearest educational institution",
+                  <EducationForm />
+                )
+              }
             />
             <InfoRow
               label="Nearest stations"
               status="Recommended"
-              onAdd={() => alert("Open Stations Modal")}
+              onAdd={() => openModal("Add nearest station", <StationsForm />)}
             />
             <InfoRow
               label="Nearest landmark"
               status="Recommended"
-              onAdd={() => alert("Open Landmark Modal")}
+              onAdd={() => openModal("Add landmark", <LandmarkForm />)}
             />
             <InfoRow
               label="Utilities provider"
               status="Recommended"
-              onAdd={() => alert("Open Utilities Modal")}
+              onAdd={() => openModal("Utilities provider", <UtilitiesForm />)}
             />
           </div>
         </section>
-
         <section>
           <PropertyGallery />
         </section>
-
         <section>
-          <CollapsibleSection title="Videos (optional)" />
+          <CollapsibleSection title="Videos (optional)">
+            <VideoUpload />
+          </CollapsibleSection>
         </section>
       </div>
-
       <Modal
         isOpen={isModalOpen}
         onClose={closeModal}

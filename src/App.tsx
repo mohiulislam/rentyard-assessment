@@ -1,21 +1,36 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "./App.css";
+import { FooterProvider } from "./context/FooterContext";
 import Layout from "./layouts/Layout";
-import AddPropertyInfo from "./pages/AddPropertyPage";
+
+// Import all three page components
+import AddPropertyPage from "./pages/AddPropertyPage";
 import AddPropertyInfoPage from "./pages/AddPropertyInfoPage";
+import PricingPage from "./pages/PricingPage";
 
 function App() {
   return (
-    <Router>
-      <div className="min-h-screen w-full bg-gray-50">
-        <Routes>
-          <Route path="/" element={<Layout />}>
-            <Route path="/" element={<AddPropertyInfo />} />
-            <Route path="/condo-info" element={<AddPropertyInfoPage />} />
-          </Route>
-        </Routes>
-      </div>
-    </Router>
+    <FooterProvider>
+      <Router>
+        <div className="min-h-screen w-full bg-gray-50">
+          <Routes>
+            <Route path="/" element={<Layout />}>
+              {/* Step 1: The first page */}
+              <Route index element={<AddPropertyPage />} />
+
+              {/* Step 2: The detailed info page */}
+              <Route
+                path="/add-property-info"
+                element={<AddPropertyInfoPage />}
+              />
+
+              {/* Step 3: The billing page */}
+              <Route path="/pricing" element={<PricingPage />} />
+            </Route>
+          </Routes>
+        </div>
+      </Router>
+    </FooterProvider>
   );
 }
 

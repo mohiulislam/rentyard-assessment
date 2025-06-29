@@ -1,6 +1,16 @@
-import React, { FC } from "react";
+import React, { FC, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { useFooter } from "../context/FooterContext";
+import { ActionFooter } from "../components/footers/PageFooters";
 
-// Import Icons
+// Components
+import SelectionCard from "../components/SelectionCard";
+import FormField from "../components/Form/FormField";
+import FileUploadField from "../components/Form/FileUploadField";
+import SelectDropdown from "../components/Form/SelectDropdown";
+import CountryPhoneDropdown from "../components/Form/CountryPhoneDropdown";
+
+// Icons
 import { AiOutlineHome } from "react-icons/ai";
 import { HiOutlineBuildingOffice2 } from "react-icons/hi2";
 import { BsBuilding } from "react-icons/bs";
@@ -8,17 +18,23 @@ import { IoKeyOutline } from "react-icons/io5";
 import { RiUserStarLine } from "react-icons/ri";
 import { MdOutlineApartment } from "react-icons/md";
 
-// Import Data
+// Data
 import { countryOptions, stateOptions } from "../constants/dropdownOptions";
 
-// Import Components
-import SelectionCard from "../components/SelectionCard";
-import FileUploadField from "../components/Form/FileUploadField";
-import FormField from "../components/Form/FormField";
-import SelectDropdown from "../components/Form/SelectDropdown";
-import CountryPhoneDropdown from "../components/Form/CountryPhoneDropdown";
-
 const AddPropertyPage: FC = () => {
+  const navigate = useNavigate();
+  const { setFooterContent } = useFooter();
+
+  useEffect(() => {
+    setFooterContent(
+      <ActionFooter
+        onNext={() => navigate("/add-property-info")}
+        nextText="Next"
+      />
+    );
+    return () => setFooterContent(null);
+  }, [setFooterContent, navigate]);
+
   return (
     <div className="py-8">
       <div className="flex flex-col gap-10 md:gap-14">

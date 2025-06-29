@@ -1,17 +1,20 @@
 import React from "react";
 import { Outlet } from "react-router-dom";
 import logo from "../assets/imgs/logo.png"; // Assuming path to your logo
+import { useFooter } from "../context/FooterContext"; // Import the custom hook
 
 export default function Layout() {
+  const { footerContent } = useFooter();
+
   return (
-    <div className="flex flex-col min-h-screen bg-white">
-      {/* 1. Header */}
+    <div className="bg-white">
+      {/* 1. Header - Now with fixed positioning */}
       <header
         className="
+          fixed top-0 left-0 w-full z-40  // <-- Added classes for fixed positioning
           h-[79px]
           border-b border-gray-300
           bg-white
-          w-full
         "
       >
         <div
@@ -56,20 +59,21 @@ export default function Layout() {
         </div>
       </header>
 
-      {/* 2. Main Content */}
-      <main className="w-full flex-grow">
+      {/* 2. Main Content - Now with padding to avoid overlap */}
+      <main className="w-full pt-[79px] pb-24">
         <div className="max-w-[1440px] mx-auto px-4 sm:px-6 md:px-8">
           <Outlet />
         </div>
       </main>
 
-      {/* 3. Footer */}
+      {/* 3. Footer - Now with fixed positioning */}
       <footer
         className="
-          w-full h-24
+          fixed bottom-0 left-0 w-full z-40 // <-- Added classes for fixed positioning
+          h-24
           bg-white
         "
-        style={{ boxShadow: "0px 4px 30px rgba(46, 45, 116, 0.05)" }}
+        style={{ boxShadow: "0px -2px 12px rgba(39, 43, 53, 0.1)" }}
       >
         <div
           className="
@@ -78,21 +82,8 @@ export default function Layout() {
             px-4 sm:px-6 md:px-8
           "
         >
-          <button className="font-fustat font-semibold text-base underline text-[#272B35] hover:text-blue-600 transition-colors">
-            Back
-          </button>
-          <button
-            disabled
-            className="
-              w-[128px] h-[47px]
-              flex items-center justify-center
-              bg-[#316EED] opacity-30 rounded-[12px]
-              font-fustat font-semibold text-base text-white
-              cursor-not-allowed
-            "
-          >
-            Get started
-          </button>
+          {/* The dynamic content from the context will be rendered here */}
+          {footerContent}
         </div>
       </footer>
     </div>
