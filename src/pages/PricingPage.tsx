@@ -2,14 +2,11 @@ import React, { FC, useState, useMemo, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useFooter } from "../context/FooterContext";
 import { PaymentFooter } from "../components/footers/PageFooters";
-
-// Import all necessary components
 import PricingToggle from "../components/pricing/PricingToggle";
 import PricingCard from "../components/pricing/PricingCard";
-import Modal from "../components/Modal"; // <-- 1. Import Modal
-import AddNewCardForm from "../components/forms/AddNewCardForm"; // <-- 2. Import the new form
+import Modal from "../components/Modal";
+import AddNewCardForm from "../components/forms/AddNewCardForm";
 import PaymentMethodRow from "../components/PaymentMethodRow";
-
 const plans = [
   {
     name: "Regular",
@@ -19,42 +16,48 @@ const plans = [
   { name: "Platinum", price: { monthly: 129.99, annually: 55.89 } },
   { name: "Enterprise", price: { monthly: 199.99, annually: 85.99 } },
 ];
+
+// 1. Added a 'charge' property to each payment method for our calculation
 const paymentMethods = [
-  { id: 1, info: "Alex jones(Amex card) ************8565" },
-  { id: 2, info: "Alex jones(Amex card) ************8565" },
-  { id: 3, info: "Alex jones(Amex card) ************8565" },
+  { id: 1, info: "Alex jones(Amex card) ************8565", charge: 3.50 },
+  { id: 2, info: "Alex jones(Visa card) ************4242", charge: 2.25 },
+  { id: 3, info: "Alex jones(Debit card) ************1234", charge: 0.00 },
 ];
 
 const PricingPage: FC = () => {
   const navigate = useNavigate();
   const { setFooterActions } = useFooter();
 
-  // Page state
-  const [billingCycle, setBillingCycle] = useState<"monthly" | "annually">(
-    "monthly"
-  );
+  const [billingCycle, setBillingCycle] = useState<"monthly" | "annually">("monthly");
   const [selectedPlan, setSelectedPlan] = useState<string>("Regular");
   const [selectedPaymentId, setSelectedPaymentId] = useState<number>(1);
-  const total = 970;
-
-  // 3. Add state and handlers for the modal
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  // 2. Updated the 'total' calculation to include the selected card's charge
+  const total = useMemo(() => {
+    const plan = plans.find((p) => p.name === selectedPlan);
+    const paymentMethod = paymentMethods.find(pm => pm.id === selectedPaymentId);
+
+    const basePrice = plan ? plan.price[billingCycle] : 0;
+    const cardCharge = paymentMethod ? paymentMethod.charge : 0;
+
+    return basePrice + cardCharge;
+  }, [selectedPlan, billingCycle, selectedPaymentId]); // 3. Added 'selectedPaymentId' as a dependency
+
   const openCardModal = () => setIsModalOpen(true);
   const closeCardModal = () => setIsModalOpen(false);
 
-  // Set the dynamic footer
   useEffect(() => {
     setFooterActions(
       <PaymentFooter
         total={total}
-        onBack={() => navigate("/property-details")}
-        onPay={() => alert("Processing payment...")}
+        onBack={() => navigate("/add-property-info")}
+        onPay={() => alert(`Processing payment of $${total.toFixed(2)}`)}
       />
     );
     return () => setFooterActions(null);
   }, [setFooterActions, navigate, total]);
 
-  // Custom footer for the "Add new card" modal
   const addCardModalFooter = (
     <div className="flex justify-end">
       <button className="px-8 py-3 bg-[#316EED] text-white font-bold rounded-xl hover:bg-blue-700">
@@ -67,9 +70,9 @@ const PricingPage: FC = () => {
     <>
       <div className="py-12">
         <div className="max-w-6xl mx-auto flex flex-col gap-10">
-          <section className="flex flex-col items-center gap-6">
-            <h1 className="text-3xl font-bold text-gray-900 text-center">
-              Chose a plan for after 30-days free trial
+          <section className="flex flex-col items-start gap-6">
+            <h1 className="text-[24px] font-bold text-gray-900">
+              Choose a plan for after 30-days free trial
             </h1>
             <PricingToggle
               billingCycle={billingCycle}
@@ -95,7 +98,6 @@ const PricingPage: FC = () => {
                 <h2 className="text-xl font-bold text-gray-800">
                   Payment option
                 </h2>
-                {/* 4. Attach the openModal function to the button */}
                 <button
                   onClick={openCardModal}
                   className="text-sm font-semibold text-blue-600 hover:underline"
@@ -117,7 +119,6 @@ const PricingPage: FC = () => {
           </section>
         </div>
       </div>
-      {/* 5. Render the Modal component */}
       <Modal
         isOpen={isModalOpen}
         onClose={closeCardModal}

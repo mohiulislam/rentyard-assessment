@@ -1,34 +1,25 @@
-import React, { FC, useState, useEffect } from "react"; // 1. Import useState
+import React, { FC, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useFooter } from "../context/FooterContext";
 import { ActionFooter } from "../components/footers/PageFooters";
-
-// Components
 import SelectionCard from "../components/SelectionCard";
 import FormField from "../components/Form/FormField";
 import FileUploadField from "../components/Form/FileUploadField";
 import SelectDropdown from "../components/Form/SelectDropdown";
 import CountryPhoneDropdown from "../components/Form/CountryPhoneDropdown";
-
-// Icons
 import { AiOutlineHome } from "react-icons/ai";
 import { BsBuilding } from "react-icons/bs";
 import { HiOutlineBuildingOffice2 } from "react-icons/hi2";
 import { IoKeyOutline } from "react-icons/io5";
 import { RiUserStarLine } from "react-icons/ri";
 import { MdOutlineApartment } from "react-icons/md";
-
-// Data
 import { countryOptions, stateOptions } from "../constants/dropdownOptions";
 
-// Define the possible roles for type safety
 type UserRole = "Landlord" | "Realtor" | "Property management company";
 
 const PropertySetupPage: FC = () => {
   const navigate = useNavigate();
   const { setFooterActions } = useFooter();
-
-  // 2. Add state to track the selected role
   const [selectedRole, setSelectedRole] = useState<UserRole>("Landlord");
 
   useEffect(() => {
@@ -44,9 +35,8 @@ const PropertySetupPage: FC = () => {
   return (
     <div className="py-8">
       <div className="flex flex-col gap-10 md:gap-14">
-        {/* Property Type Section (No changes here) */}
         <section className="flex flex-col gap-6">
-          <h2 className="font-fustat font-bold text-2xl leading-[34px] text-[#272B35]">
+          <h2 className="font-fustat font-bold text-[24px] leading-[34px] text-[#272B35]">
             Property type
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -69,12 +59,10 @@ const PropertySetupPage: FC = () => {
           </div>
         </section>
 
-        {/* Select Role Section */}
         <section className="flex flex-col gap-6">
-          <h2 className="font-fustat font-bold text-2xl leading-[34px] text-[#272B35]">
+          <h2 className="font-fustat font-bold text-[24px] leading-[34px] text-[#272B35]">
             Select your role
           </h2>
-          {/* 3. Update SelectionCards to be interactive */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             <SelectionCard
               icon={<IoKeyOutline size={28} />}
@@ -100,7 +88,6 @@ const PropertySetupPage: FC = () => {
           </div>
         </section>
 
-        {/* 4. Conditionally render the forms based on the selected role */}
         {selectedRole === "Landlord" && (
           <section>
             <div className="border border-[#E0E0E0] rounded-xl bg-white">
@@ -176,7 +163,6 @@ const PropertySetupPage: FC = () => {
           </section>
         )}
 
-        {/* This checkbox will now appear below the conditionally rendered form */}
         <div className="flex items-center gap-2">
           <input
             type="checkbox"

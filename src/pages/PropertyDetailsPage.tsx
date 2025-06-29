@@ -69,8 +69,8 @@ const PropertyDetailsPage: FC = () => {
   return (
     <div className="py-8 bg-white">
       <div className="flex flex-col gap-8">
-        <h1 className="font-fustat font-bold text-2xl leading-[34px] text-[#272B35]">
-          Add Property Information
+        <h1 className="font-fustat font-bold text-[24px] leading-[34px] text-[#272B35]">
+          Condominiums information
         </h1>
         <section className="grid grid-cols-1 lg:grid-cols-2 gap-4">
           <div className="flex flex-col gap-4">
