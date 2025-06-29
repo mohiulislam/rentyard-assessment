@@ -29,7 +29,7 @@ const PropertyDetailsPage: FC = () => {
   useEffect(() => {
     setFooterActions(
       <ActionFooter
-        onBack={() => navigate("/")}
+        onBack={() => navigate("/property-setup")}
         onNext={() => navigate("/pricing")}
         nextText="Next"
       />
