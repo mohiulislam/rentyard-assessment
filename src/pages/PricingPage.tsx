@@ -1,4 +1,4 @@
-import React, { FC, useState, useMemo, useEffect } from "react";
+import { useState, useMemo, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useFooter } from "../context/FooterContext";
 import { PaymentFooter } from "../components/footers/PageFooters";
@@ -7,6 +7,7 @@ import PricingCard from "../components/pricing/PricingCard";
 import Modal from "../components/Modal";
 import AddNewCardForm from "../components/forms/AddNewCardForm";
 import PaymentMethodRow from "../components/PaymentMethodRow";
+import type { FC } from "react";
 
 const plans = [
   {

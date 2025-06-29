@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import type { FC } from "react";
 import FormField from "../Form/FormField";
 import InputWithDropdown from "../Form/InputWithDropdown"; // Using the generic component
 

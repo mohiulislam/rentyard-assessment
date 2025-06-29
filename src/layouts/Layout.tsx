@@ -1,4 +1,3 @@
-import React from "react";
 import { Outlet, useLocation, useNavigate, Link } from "react-router-dom";
 import logo from "../assets/imgs/logo.png";
 import { useFooter } from "../context/FooterContext";

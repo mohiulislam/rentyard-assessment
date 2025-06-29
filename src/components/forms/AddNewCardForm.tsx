@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import type { FC } from "react";
 import FormField from "../Form/FormField";
 import IconFormField from "../Form/IconFormField";
 import { FaCreditCard } from "react-icons/fa"; // Example icons

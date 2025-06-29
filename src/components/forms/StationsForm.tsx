@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import type { FC } from "react";
 import SelectDropdown from "../Form/SelectDropdown";
 import FormField from "../Form/FormField";
 import InputWithDropdown from "../Form/InputWithDropdown"; // <-- Import the new component
@@ -18,7 +18,7 @@ const StationsForm: FC = () => {
         {/* Use the new component with its props */}
         <InputWithDropdown
           label="Distance from property*"
-          inputValue="1.5"
+          value="1.5"
           options={distanceUnits}
           initialOption="Mile"
         />

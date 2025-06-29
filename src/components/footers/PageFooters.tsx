@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import type { FC } from "react";
 
 // --- For Back / Next / Get Started buttons ---
 export interface ActionFooterProps {

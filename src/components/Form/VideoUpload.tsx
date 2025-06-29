@@ -1,6 +1,6 @@
-import React, { FC, useState } from "react";
+import { useState } from "react";
 import VideoUploadSlot from "./VideoUploadSlot";
-
+import type { FC } from "react";
 type VideoSlots = {
   propertyVideo: File | null;
   virtualTour: File | null;

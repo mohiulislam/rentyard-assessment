@@ -1,6 +1,6 @@
-import React, { FC, useState } from "react";
+import { useState } from "react";
 import type { Amenity } from "../constants/amenities";
-
+import type { FC } from "react";
 
 interface AmenityPillProps {
   amenity: Amenity;

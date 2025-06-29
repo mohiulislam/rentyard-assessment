@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import type { FC } from "react";
 import { FiInfo } from "react-icons/fi"; // Using an 'info' icon for a friendly look
 
 const HomePage: FC = () => {

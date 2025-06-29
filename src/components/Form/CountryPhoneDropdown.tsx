@@ -1,5 +1,12 @@
-import React, { FC, useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import { phoneCountries } from "../../constants/dropdownOptions";
+import type { FC } from "react";
+// Define the Country type
+type Country = {
+  name: string;
+  code: string;
+  flag: string;
+};
 
 const CountryPhoneDropdown: FC = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);

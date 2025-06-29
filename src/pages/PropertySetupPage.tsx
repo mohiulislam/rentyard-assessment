@@ -1,4 +1,4 @@
-import React, { FC, useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useFooter } from "../context/FooterContext";
 import { ActionFooter } from "../components/footers/PageFooters";
@@ -14,6 +14,7 @@ import { IoKeyOutline } from "react-icons/io5";
 import { RiUserStarLine } from "react-icons/ri";
 import { MdOutlineApartment } from "react-icons/md";
 import { countryOptions, stateOptions } from "../constants/dropdownOptions";
+import type { FC } from "react";
 
 type UserRole = "Landlord" | "Realtor" | "Property management company";
 

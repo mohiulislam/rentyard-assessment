@@ -1,7 +1,8 @@
-import React, { FC, useState, useRef, ChangeEvent } from "react";
+import { useState, useRef } from "react";
+import type { ChangeEvent } from "react";
 import { FiUpload, FiX } from "react-icons/fi";
 import { FaFilePdf } from "react-icons/fa";
-
+import type { FC } from "react";
 interface FileUploadFieldProps {
   label: string;
 }

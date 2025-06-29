@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import type { FC } from "react";
 import { FiCheckSquare } from "react-icons/fi";
 
 interface PricingCardProps {
@@ -8,6 +8,7 @@ interface PricingCardProps {
   isSelected: boolean;
   hasAutoPay?: boolean;
   onSelect: () => void;
+  className?: string;
 }
 
 const PricingCard: FC<PricingCardProps> = ({
@@ -17,13 +18,17 @@ const PricingCard: FC<PricingCardProps> = ({
   isSelected,
   hasAutoPay = false,
   onSelect,
+  className = "",
 }) => {
-  // Updated classes for a pixel-perfect match to the design
-  const containerClasses = `p-6 border rounded-[10px] cursor-pointer transition-all duration-300 ${
-    isSelected
-      ? "border-[1.5px] border-[#316EED] bg-[#F5F8FF]"
-      : "border-[#D8D8D8] bg-white hover:border-gray-400"
-  }`;
+  const containerClasses = `
+    p-6 border rounded-[10px] cursor-pointer transition-all duration-300
+    ${
+      isSelected
+        ? "border-[1.5px] border-[#316EED] bg-[#F5F8FF]"
+        : "border-[#D8D8D8] bg-white hover:border-gray-400"
+    }
+    ${className}  // ✅ Allow custom class from props
+  `;
 
   return (
     <div className={containerClasses} onClick={onSelect}>

@@ -1,6 +1,5 @@
-import React, { FC } from "react";
 import TextAreaField from "../Form/TextAreaField";
-
+import type { FC } from "react";
 
 const AboutPropertyForm: FC = () => {
   return (

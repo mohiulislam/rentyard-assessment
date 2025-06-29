@@ -1,5 +1,4 @@
-import React, { FC } from "react";
-
+import type { FC } from "react";
 interface FormFieldProps {
   label: string;
   placeholder?: string;

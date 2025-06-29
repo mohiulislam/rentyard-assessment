@@ -1,6 +1,6 @@
-import React, { FC, useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import { FiChevronDown } from "react-icons/fi";
-
+import type { FC } from "react";
 interface InputWithDropdownProps {
   label: string;
   value: string;

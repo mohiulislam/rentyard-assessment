@@ -1,6 +1,6 @@
-import React, { FC, useRef } from "react";
+import { useRef } from "react";
 import { FiUpload, FiVideo } from "react-icons/fi";
-
+import type { FC } from "react";
 interface VideoUploadSlotProps {
   label: string;
   fileName?: string | null;

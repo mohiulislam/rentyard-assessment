@@ -1,5 +1,6 @@
-import React, { FC, useState, forwardRef } from "react";
+import { useState, forwardRef } from "react";
 import DatePicker from "react-datepicker"; // 1. Import the DatePicker component
+import type { FC } from "react";
 import { FiCalendar } from "react-icons/fi";
 
 interface DatePickerFieldProps {
@@ -43,7 +44,7 @@ const DatePickerField: FC<DatePickerFieldProps> = ({ label, placeholder }) => {
        */}
       <DatePicker
         selected={selectedDate}
-        onChange={(date: Date) => setSelectedDate(date)}
+        onChange={(date: Date | null) => setSelectedDate(date)}
         customInput={<CustomInput />}
         dateFormat="do MMMM yyyy" // Example format: "5th July 2025"
         popperPlacement="bottom-end" // Helps position the calendar nicely

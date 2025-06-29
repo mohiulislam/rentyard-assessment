@@ -1,5 +1,5 @@
-import React, { FC, ReactNode } from "react";
-
+import type { ReactNode } from "react";
+import type { FC } from "react";
 interface IconFormFieldProps {
   label: string;
   placeholder?: string;

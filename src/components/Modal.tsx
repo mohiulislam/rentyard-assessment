@@ -1,12 +1,14 @@
-import React, { FC, useEffect } from "react";
+import { useEffect } from "react";
 import { FiX } from "react-icons/fi";
+import type { FC, ReactNode } from "react";
 
 interface ModalProps {
   isOpen: boolean;
   onClose: () => void;
   title: string;
-  children: React.ReactNode;
-  footer?: React.ReactNode; // <-- 1. Add optional footer prop
+  children: ReactNode;
+  footer?: ReactNode;
+  className?: string; // ✅ Added className prop
 }
 
 const Modal: FC<ModalProps> = ({
@@ -15,6 +17,7 @@ const Modal: FC<ModalProps> = ({
   title,
   children,
   footer,
+  className = "", // ✅ Default empty
 }) => {
   useEffect(() => {
     const handleEsc = (event: KeyboardEvent) => {
@@ -32,7 +35,10 @@ const Modal: FC<ModalProps> = ({
       onClick={onClose}
     >
       <div
-        className="bg-white rounded-[14px] w-[780px] flex flex-col"
+        className={`
+          bg-white rounded-[14px] w-[780px] flex flex-col
+          ${className}  // ✅ Allow external custom styles
+        `}
         onClick={(e) => e.stopPropagation()}
       >
         {/* Modal Header */}
@@ -51,14 +57,12 @@ const Modal: FC<ModalProps> = ({
         {/* Modal Content */}
         <div className="p-4">{children}</div>
 
-        {/* 2. Update Footer Logic */}
+        {/* Modal Footer */}
         <div className="px-4 pb-4">
           <div className="border-t border-[#E0E0E0] pt-4">
             {footer ? (
-              // Render custom footer if provided
               footer
             ) : (
-              // Render default footer otherwise
               <div className="flex justify-end">
                 <button className="px-6 py-3 bg-[#316EED] text-white font-fustat font-bold text-base rounded-xl hover:bg-blue-700">
                   Add

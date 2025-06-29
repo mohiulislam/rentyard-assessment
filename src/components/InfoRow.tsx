@@ -1,6 +1,5 @@
-import React, { FC } from "react";
 import { IoIosAdd } from "react-icons/io";
-
+import type { FC } from "react";
 interface InfoRowProps {
   label: string;
   status: "Required" | "Optional" | "Recommended";

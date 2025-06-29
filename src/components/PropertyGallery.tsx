@@ -1,6 +1,6 @@
-import React, { FC, useState } from "react";
+import { useState } from "react";
 import PhotoUploadSlot from "./PhotoUploadSlot";
-
+import type { FC } from "react";
 // Define a type for our photo state
 type PhotoSlots = {
   featuredLarge: string | null;

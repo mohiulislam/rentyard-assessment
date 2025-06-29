@@ -1,6 +1,6 @@
-import React, { FC, useState } from "react";
+import { useState } from "react";
 import { FiChevronUp } from "react-icons/fi";
-
+import type { FC } from "react";
 interface CollapsibleSectionProps {
   title: string;
   children?: React.ReactNode;

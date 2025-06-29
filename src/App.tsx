@@ -1,13 +1,12 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "./App.css";
-import { FooterProvider } from "./context/FooterContext";
+import { FooterProvider } from "./context/FooterProvider";
 import Layout from "./layouts/Layout";
 import HomePage from "./pages/HomePage";
 import PricingPage from "./pages/PricingPage";
 import PropertySetupPage from "./pages/PropertySetupPage";
 import PropertyDetailsPage from "./pages/PropertyDetailsPage";
-import 'react-datepicker/dist/react-datepicker.css';
-
+import "react-datepicker/dist/react-datepicker.css";
 
 function App() {
   return (

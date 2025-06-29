@@ -1,7 +1,7 @@
-import React, { FC, useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import TextAreaField from "../Form/TextAreaField";
 import { FiChevronDown } from "react-icons/fi";
-
+import type { FC } from "react";
 // This is a new, self-contained component specifically for the parking time dropdown row.
 // It is styled correctly and manages its own state.
 const GuestParkingTime: FC = () => {

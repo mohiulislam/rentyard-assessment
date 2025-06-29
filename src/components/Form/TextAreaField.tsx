@@ -1,4 +1,5 @@
-import React, { FC, useState } from "react";
+import { useState } from "react";
+import type { FC } from "react";
 
 interface TextAreaFieldProps {
   placeholder?: string;

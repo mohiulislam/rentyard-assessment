@@ -1,10 +1,10 @@
-import React, { FC, useState } from "react";
+import { useState } from "react";
 import FormField from "../Form/FormField";
 import CountryPhoneDropdown from "../Form/CountryPhoneDropdown";
 import CheckboxField from "../Form/CheckboxField";
 import SelectDropdown from "../Form/SelectDropdown";
 import { stateOptions } from "../../constants/dropdownOptions";
-
+import type { FC } from "react";
 const LeasingInfoForm: FC = () => {
   // 1. Add state to track the checkbox
   const [isSameAddress, setIsSameAddress] = useState(true);

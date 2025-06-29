@@ -1,6 +1,5 @@
-import React, { FC } from "react";
 import { FiSearch } from "react-icons/fi";
-
+import type { FC } from "react";
 interface SearchBarProps {
   placeholder: string;
   onSearchChange: (query: string) => void;

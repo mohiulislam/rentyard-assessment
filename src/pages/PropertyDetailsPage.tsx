@@ -1,4 +1,4 @@
-import React, { FC, useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useFooter } from "../context/FooterContext";
 import { FiInfo } from "react-icons/fi";
@@ -21,6 +21,7 @@ import EducationForm from "../components/forms/EducationForm";
 import StationsForm from "../components/forms/StationsForm";
 import LandmarkForm from "../components/forms/LandmarkForm";
 import UtilitiesForm from "../components/forms/UtilitiesForm";
+import type { FC } from "react";
 
 const PropertyDetailsPage: FC = () => {
   const navigate = useNavigate();

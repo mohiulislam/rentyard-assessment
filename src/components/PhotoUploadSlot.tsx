@@ -1,6 +1,6 @@
-import React, { FC, useRef } from "react";
+import { useRef } from "react";
 import { FiUpload } from "react-icons/fi";
-
+import type { FC } from "react";
 interface PhotoUploadSlotProps {
   variant: "large" | "small";
   previewUrl?: string | null;

@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import type { FC } from "react";
 import FormField from "../Form/FormField";
 import SelectDropdown from "../Form/SelectDropdown";
 

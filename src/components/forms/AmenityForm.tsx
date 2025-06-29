@@ -1,8 +1,8 @@
-import React, { FC, useState, useMemo } from "react";
+import { useState, useMemo } from "react";
 import SearchBar from "../Form/SearchBar";
 import { allAmenities } from "../../constants/amenities";
 import AmenityPill from "../AmenityPill";
-
+import type { FC } from "react";
 const AmenityForm: FC = () => {
   const [searchQuery, setSearchQuery] = useState("");
 
