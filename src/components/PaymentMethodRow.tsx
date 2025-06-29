@@ -1,5 +1,5 @@
 import React, { FC } from "react";
-import { FaCcAmex } from "react-icons/fa"; // Example icon for Amex
+import { FaCcAmex } from "react-icons/fa";
 
 interface PaymentMethodRowProps {
   cardInfo: string;
@@ -24,7 +24,7 @@ const PaymentMethodRow: FC<PaymentMethodRowProps> = ({
       </div>
       <button
         onClick={onSelect}
-        className={`px-6 py-2 text-sm font-semibold rounded-lg transition-colors border ${buttonClasses}`}
+        className={`w-24 px-4 py-2 text-sm font-semibold rounded-lg transition-colors border ${buttonClasses}`}
       >
         {isSelected ? "Selected" : "Select"}
       </button>
