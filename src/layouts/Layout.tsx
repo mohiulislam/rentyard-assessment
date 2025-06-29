@@ -55,15 +55,12 @@ export default function Layout() {
   // Helper function to render the correct button in the header
   const renderHeaderButton = () => {
     if (location.pathname === "/") {
-      // Show "+ Add Property" button on the homepage with smaller middle circle and large yellowish pulse wave
       return (
         <div className="relative">
-          {/* Smaller middle circle with large pulse wave */}
           <span className="absolute -top-2 -right-2 flex h-6 w-6">
             <span className="custom-ping absolute inline-flex h-full w-full rounded-full bg-yellow-400 opacity-75"></span>
             <span className="relative inline-flex rounded-full h-6 w-6 bg-yellow-500"></span>
           </span>
-
           <button
             onClick={() => navigate("/property-setup")}
             className="w-auto h-[47px] flex items-center justify-center gap-2 px-4 bg-blue-600 text-white rounded-xl font-semibold text-base shadow-sm hover:bg-blue-700 transition-colors"
@@ -74,18 +71,16 @@ export default function Layout() {
         </div>
       );
     } else if (currentStep > 0) {
-      // Show "Save & Exit" button during the multi-step process
       return (
         <button
           type="button"
-          onClick={() => navigate("/")} // Navigate back to home on click
+          onClick={() => navigate("/")}
           className="w-[128px] h-[47px] flex items-center justify-center border border-[#E0E0E0] rounded-xl font-semibold text-base"
         >
           Save & Exit
         </button>
       );
     }
-    // Return nothing on other pages
     return null;
   };
 
@@ -100,7 +95,6 @@ export default function Layout() {
               className="h-[38px] w-auto cursor-pointer"
             />
           </Link>
-
           {renderHeaderButton()}
         </div>
       </header>
@@ -112,22 +106,24 @@ export default function Layout() {
         </div>
       </main>
 
-      {/* Footer Area */}
-      <footer
-        className="fixed bottom-0 left-0 w-full z-40 flex flex-col bg-white"
-        style={{ boxShadow: "0px -2px 12px rgba(39, 43, 53, 0.1)" }}
-      >
-        {currentStep > 0 && (
-          <div className="w-full h-1 flex flex-row items-center gap-2.5">
-            {Array.from({ length: totalSteps }).map((_, index) => (
-              <ProgressSegment key={index} isActive={index < currentStep} />
-            ))}
+      {/* Footer Area - Only render if not on homepage */}
+      {location.pathname !== "/" && (
+        <footer
+          className="fixed bottom-0 left-0 w-full z-40 flex flex-col bg-white"
+          style={{ boxShadow: "0px -2px 12px rgba(39, 43, 53, 0.1)" }}
+        >
+          {currentStep > 0 && (
+            <div className="w-full h-1 flex flex-row items-center gap-2.5">
+              {Array.from({ length: totalSteps }).map((_, index) => (
+                <ProgressSegment key={index} isActive={index < currentStep} />
+              ))}
+            </div>
+          )}
+          <div className="h-24 max-w-[1440px] w-full mx-auto flex items-center justify-between px-4 sm:px-6 md:px-20">
+            {footerActions}
           </div>
-        )}
-        <div className="h-24 max-w-[1440px] w-full mx-auto flex items-center justify-between px-4 sm:px-6 md:px-20">
-          {footerActions}
-        </div>
-      </footer>
+        </footer>
+      )}
     </div>
   );
 }
