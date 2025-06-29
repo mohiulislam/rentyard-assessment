@@ -1,6 +1,7 @@
 import { useState } from "react";
 import PhotoUploadSlot from "./PhotoUploadSlot";
 import type { FC } from "react";
+
 // Define a type for our photo state
 type PhotoSlots = {
   featuredLarge: string | null;
@@ -35,21 +36,21 @@ const PropertyGallery: FC = () => {
   };
 
   return (
-    <div className="p-5 bg-white border border-[#E0E0E0] rounded-[14px]">
-      <div className="pb-5 border-b border-gray-200">
-        <h3 className="font-fustat font-semibold text-lg text-[#272B35]">
+    <div className="p-4 sm:p-6 md:p-8 bg-white border border-[#E0E0E0] rounded-[14px] w-full max-w-7xl mx-auto">
+      <div className="pb-4 sm:pb-5 border-b border-gray-200">
+        <h3 className="font-fustat font-semibold text-base sm:text-lg text-[#272B35]">
           Property gallery
-          <span className="text-gray-500 font-normal ml-1">
-            (Its not unit photo)*
+          <span className="text-gray-500 font-normal ml-1 text-sm sm:text-base">
+            (Not unit photos)*
           </span>
         </h3>
       </div>
-      <div className="pt-5 flex flex-col lg:flex-row gap-6">
-        <div>
-          <h4 className="font-fustat font-semibold text-base mb-3">
+      <div className="pt-4 sm:pt-5 flex flex-col lg:flex-row gap-4 sm:gap-6 md:gap-8">
+        <div className="flex-1 min-w-0">
+          <h4 className="font-fustat font-semibold text-sm sm:text-base mb-3">
             Featured photos*
           </h4>
-          <div className="grid grid-cols-3 gap-3 h-48 w-[330px]">
+          <div className="grid grid-cols-3 gap-3 h-40 sm:h-48 md:h-56 w-full max-w-[400px] sm:max-w-[500px] md:max-w-[600px]">
             <div className="col-span-2 row-span-2">
               <PhotoUploadSlot
                 variant="large"
@@ -77,12 +78,14 @@ const PropertyGallery: FC = () => {
             </div>
           </div>
         </div>
-        <div>
-          <h4 className="font-fustat font-semibold text-base mb-3">
+        <div className="flex-1 min-w-0">
+          <h4 className="font-fustat font-semibold text-sm sm:text-base mb-3">
             More photos{" "}
-            <span className="text-gray-500 font-normal">(optional)</span>
+            <span className="text-gray-500 font-normal text-xs sm:text-sm">
+              (optional)
+            </span>
           </h4>
-          <div className="grid grid-cols-3 gap-3 h-48 w-[330px]">
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 h-40 sm:h-48 md:h-56 w-full max-w-[400px] sm:max-w-[500px] md:max-w-[600px]">
             <div className="col-span-1">
               <PhotoUploadSlot
                 variant="small"
