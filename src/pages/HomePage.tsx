@@ -15,9 +15,9 @@ const HomePage: FC = () => {
             A Note on This Prototype
           </h3>
           <p className="mt-1 text-md text-blue-700 leading-relaxed">
-            Since I didn't have a clear idea about the implementation, the UI
-            was created as best as possible based on assumptions. I used
-            TypeScript (TS) in this project for better type safety and
+            Since I didn't have a clear idea about the implementation, the
+            functionality was created as best as possible based on assumptions.
+            I used TypeScript (TS) in this project for better type safety and
             development experience. If I had the full idea, the implementation
             would have been more functional. Thanks!
           </p>
