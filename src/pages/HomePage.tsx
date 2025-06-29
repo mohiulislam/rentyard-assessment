@@ -19,7 +19,7 @@ const HomePage: FC = () => {
             was created as best as possible based on assumptions. I used
             TypeScript (TS) in this project for better type safety and
             development experience. If I had the full idea, the implementation
-            would have been more functional.
+            would have been more functional. Thanks!
           </p>
         </div>
       </div>
