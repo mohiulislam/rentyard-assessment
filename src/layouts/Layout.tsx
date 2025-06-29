@@ -84,8 +84,11 @@ export default function Layout() {
     return null;
   };
 
+  // Determine padding-bottom for main based on footer presence
+  const mainPaddingBottom = location.pathname === "/" ? "pb-0" : "pb-24";
+
   return (
-    <div className="bg-white min-h-screen">
+    <div className="bg-white flex flex-col min-h-screen">
       <header className="fixed top-0 left-0 w-full z-40 h-[79px] border-b border-gray-300 bg-white">
         <div className="mx-auto max-w-[1440px] h-full flex items-center justify-between px-4 sm:px-6 md:px-20">
           <Link to="/">
@@ -100,7 +103,7 @@ export default function Layout() {
       </header>
 
       {/* Main Content Area */}
-      <main className="w-full pt-[79px] pb-32">
+      <main className={`w-full pt-[79px] ${mainPaddingBottom} flex-grow`}>
         <div className="max-w-[1440px] mx-auto px-4 sm:px-6 md:px-20">
           <Outlet />
         </div>
