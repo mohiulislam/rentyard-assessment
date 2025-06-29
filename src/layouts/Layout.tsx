@@ -1,89 +1,72 @@
 import React from "react";
-import { Outlet } from "react-router-dom";
-import logo from "../assets/imgs/logo.png"; // Assuming path to your logo
-import { useFooter } from "../context/FooterContext"; // Import the custom hook
+import { Outlet, useLocation } from "react-router-dom";
+import logo from "../assets/imgs/logo.png"; // Make sure this path is correct
+import { useFooter } from "../context/FooterContext";
+
+// Helper for a single progress bar segment
+const ProgressSegment: React.FC<{ isActive: boolean }> = ({ isActive }) => (
+  <div
+    className={`flex-1 h-full transition-colors duration-300 ${
+      isActive ? "bg-[#272B35]" : "bg-[#E0E0E0]"
+    }`}
+  ></div>
+);
 
 export default function Layout() {
-  const { footerContent } = useFooter();
+  const { footerActions } = useFooter();
+  const location = useLocation();
+
+  // Determine the current step based on the URL
+  const totalSteps = 3;
+  let currentStep = 0;
+  switch (location.pathname) {
+    case "/":
+      currentStep = 1;
+      break;
+    case "/property-details":
+      currentStep = 2;
+      break;
+    case "/pricing":
+      currentStep = 3;
+      break;
+    default:
+      currentStep = 0; // Hide stepper on other pages
+  }
 
   return (
-    <div className="bg-white">
-      {/* 1. Header - Now with fixed positioning */}
-      <header
-        className="
-          fixed top-0 left-0 w-full z-40  // <-- Added classes for fixed positioning
-          h-[79px]
-          border-b border-gray-300
-          bg-white
-        "
-      >
-        <div
-          className="
-            mx-auto
-            max-w-[1440px]
-            h-full
-            flex items-center justify-between
-            px-4 sm:px-6 md:px-8
-          "
-        >
-          <img
-            src={logo}
-            alt="Logo"
-            className="
-              w-[100px] sm:w-[120px] md:w-[147.28px]
-              h-auto object-contain
-            "
-          />
+    <div className="bg-white min-h-screen">
+      <header className="fixed top-0 left-0 w-full z-40 h-[79px] border-b border-gray-300 bg-white">
+        <div className="mx-auto max-w-[1440px] h-full flex items-center justify-between px-4 sm:px-6 md:px-20">
+          <img src={logo} alt="RentYard Logo" className="h-[38px] w-auto" />
           <button
             type="button"
-            className="
-              flex-none
-              text-sm md:text-base
-              w-[60px] h-[40px] md:w-[75px] md:h-[47px]
-              flex items-center justify-center
-              px-4 py-2 md:px-6 md:py-3
-              gap-2
-              border border-[#E0E0E0] rounded-lg md:rounded-[12px]
-              text-[#272B35]
-              font-semibold
-              bg-white
-              cursor-pointer
-              transition-colors duration-200 ease-in-out
-              hover:bg-gray-50
-              focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2
-              active:bg-gray-100
-            "
+            className="w-[128px] h-[47px] flex items-center justify-center border border-[#E0E0E0] rounded-xl font-semibold text-base"
           >
-            Exit
+            Save & Exit
           </button>
         </div>
       </header>
 
-      {/* 2. Main Content - Now with padding to avoid overlap */}
       <main className="w-full pt-[79px] pb-24">
-        <div className="max-w-[1440px] mx-auto px-4 sm:px-6 md:px-8">
+        {/* The max-width and padding for page content is controlled here */}
+        <div className="max-w-[1440px] mx-auto px-4 sm:px-6 md:px-20">
           <Outlet />
         </div>
       </main>
 
-      {/* 3. Footer - Now with fixed positioning */}
       <footer
-        className="
-          fixed bottom-0 left-0 w-full z-40 // <-- Added classes for fixed positioning
-          h-24
-          bg-white
-        "
-        style={{ boxShadow: "0px -2px 12px rgba(39, 43, 53, 0.1)" }}
+        className="fixed bottom-0 left-0 w-full z-40 flex flex-col bg-white"
+        style={{ boxShadow: "0px -4px 30px rgba(46, 45, 116, 0.05)" }}
       >
-        <div
-          className="
-            max-w-[1440px] h-full mx-auto
-            flex items-center justify-between
-            px-4 sm:px-6 md:px-8
-          "
-        >
-          {/* The dynamic content from the context will be rendered here */}
-          {footerContent}
+        {currentStep > 0 && (
+          <div className="w-full h-1 flex flex-row items-center gap-2.5">
+            {Array.from({ length: totalSteps }).map((_, index) => (
+              <ProgressSegment key={index} isActive={index < currentStep} />
+            ))}
+          </div>
+        )}
+        <div className="h-24 max-w-[1440px] w-full mx-auto flex items-center justify-between px-4 sm:px-6 md:px-20">
+          {footerActions}
         </div>
       </footer>
     </div>

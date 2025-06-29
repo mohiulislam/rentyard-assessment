@@ -6,27 +6,24 @@ import React, {
   ReactNode,
 } from "react";
 
-// Define the shape of our context data
+// The context will now manage the 'actions' (buttons) part of the footer
 interface FooterContextType {
-  footerContent: ReactNode;
-  setFooterContent: (content: ReactNode) => void;
+  footerActions: ReactNode;
+  setFooterActions: (actions: ReactNode) => void;
 }
 
-// Create the context with a default value
 const FooterContext = createContext<FooterContextType | undefined>(undefined);
 
-// Create the Provider component that will wrap our app
 export const FooterProvider: FC<{ children: ReactNode }> = ({ children }) => {
-  const [footerContent, setFooterContent] = useState<ReactNode>(null);
+  const [footerActions, setFooterActions] = useState<ReactNode>(null);
 
   return (
-    <FooterContext.Provider value={{ footerContent, setFooterContent }}>
+    <FooterContext.Provider value={{ footerActions, setFooterActions }}>
       {children}
     </FooterContext.Provider>
   );
 };
 
-// Create a custom hook for easy access to the context
 export const useFooter = (): FooterContextType => {
   const context = useContext(FooterContext);
   if (!context) {

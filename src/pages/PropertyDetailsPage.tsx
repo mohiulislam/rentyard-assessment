@@ -1,19 +1,13 @@
 import React, { FC, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useFooter } from "../context/FooterContext";
-
-// Icons
 import { FiInfo } from "react-icons/fi";
-
-// Reusable Components
+import { ActionFooter } from "../components/footers/PageFooters";
 import InfoRow from "../components/InfoRow";
 import PropertyGallery from "../components/PropertyGallery";
 import CollapsibleSection from "../components/CollapsibleSection";
 import Modal from "../components/Modal";
 import VideoUpload from "../components/Form/VideoUpload";
-import { ActionFooter } from "../components/footers/PageFooters";
-
-// Form Components
 import PropertyAddressForm from "../components/forms/PropertyAddressForm";
 import LeasingInfoForm from "../components/forms/LeasingInfoForm";
 import ChargesForm from "../components/forms/ChargesForm";
@@ -28,20 +22,20 @@ import StationsForm from "../components/forms/StationsForm";
 import LandmarkForm from "../components/forms/LandmarkForm";
 import UtilitiesForm from "../components/forms/UtilitiesForm";
 
-const AddPropertyInfoPage: FC = () => {
+const PropertyDetailsPage: FC = () => {
   const navigate = useNavigate();
-  const { setFooterContent } = useFooter();
+  const { setFooterActions } = useFooter();
 
   useEffect(() => {
-    setFooterContent(
+    setFooterActions(
       <ActionFooter
         onBack={() => navigate("/")}
         onNext={() => navigate("/pricing")}
         nextText="Next"
       />
     );
-    return () => setFooterContent(null);
-  }, [setFooterContent, navigate]);
+    return () => setFooterActions(null);
+  }, [setFooterActions, navigate]);
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalTitle, setModalTitle] = useState("");
@@ -58,20 +52,15 @@ const AddPropertyInfoPage: FC = () => {
     setModalFooter(footer || null);
     setIsModalOpen(true);
   };
-
-  const closeModal = () => {
-    setIsModalOpen(false);
-  };
+  const closeModal = () => setIsModalOpen(false);
 
   const chargesModalFooter = (
     <div className="flex justify-between items-center">
       <div className="flex items-center gap-2">
-        <FiInfo size={20} className="text-[#272B35]" />
-        <span className="font-fustat font-semibold text-base text-[#272B35]">
-          Type 0 if charges not applicable
-        </span>
+        <FiInfo size={20} />
+        <span className="font-semibold">Type 0 if charges not applicable</span>
       </div>
-      <button className="px-6 py-3 bg-[#316EED] text-white font-fustat font-bold text-base rounded-xl hover:bg-blue-700">
+      <button className="px-6 py-3 bg-[#316EED] text-white font-bold rounded-xl">
         Add
       </button>
     </div>
@@ -198,4 +187,4 @@ const AddPropertyInfoPage: FC = () => {
   );
 };
 
-export default AddPropertyInfoPage;
+export default PropertyDetailsPage;

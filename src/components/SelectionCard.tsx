@@ -1,22 +1,25 @@
-import React from "react";
+import React, { FC } from "react";
 
 interface SelectionCardProps {
   icon: React.ReactNode;
   title: string;
   description: string;
   selected?: boolean;
+  onClick?: () => void; // <-- 1. Add the onClick prop
 }
 
-const SelectionCard: React.FC<SelectionCardProps> = ({
+const SelectionCard: FC<SelectionCardProps> = ({
   icon,
   title,
   description,
   selected = false,
+  onClick, // <-- Get the onClick prop
 }) => {
   return (
     <div
+      onClick={onClick} // <-- 2. Use the onClick prop on the main container
       className={`
-        group flex flex-row items-center p-5 gap-4 bg-white border border-2 rounded-xl
+        group flex flex-row items-center p-5 gap-4 bg-white border-2 rounded-xl
         transition-all duration-300 w-full min-h-24 cursor-pointer
         ${
           selected
