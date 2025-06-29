@@ -78,6 +78,7 @@ export default function Layout() {
       return (
         <button
           type="button"
+          onClick={() => navigate("/")} // Navigate back to home on click
           className="w-[128px] h-[47px] flex items-center justify-center border border-[#E0E0E0] rounded-xl font-semibold text-base"
         >
           Save & Exit
