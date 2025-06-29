@@ -4,17 +4,11 @@ import { IoIosAdd } from "react-icons/io";
 interface InfoRowProps {
   label: string;
   status: "Required" | "Optional" | "Recommended";
+  onAdd: () => void; // <-- ADD THIS PROP
 }
 
-const InfoRow: FC<InfoRowProps> = ({ label, status }) => {
-  // This logic correctly interprets the visual need from the screenshot
-  const statusTextMap = {
-    Required: `(${status})`,
-    Optional: `(${status}, add fees if you allow pet)`, // Special case from screenshot
-    Recommended: `(${status} but recommended)`,
-  };
-
-  // Fallback for labels that don't have special text
+const InfoRow: FC<InfoRowProps> = ({ label, status, onAdd }) => {
+  // ... (rest of the component logic is the same)
   const getStatusText = () => {
     if (label === "Pet fees") return `(${status}, add fees if you allow pet)`;
     if (status === "Recommended") return `(${status} but recommended)`;
@@ -35,7 +29,11 @@ const InfoRow: FC<InfoRowProps> = ({ label, status }) => {
           {getStatusText()}
         </span>
       </p>
-      <button className="flex items-center gap-[6px] text-[#316EED] font-semibold">
+      {/* Attach the onAdd function to the button's onClick event */}
+      <button
+        onClick={onAdd}
+        className="flex items-center gap-[6px] text-[#316EED] font-semibold"
+      >
         <IoIosAdd size={22} />
         <span className="text-[16px] underline">Add</span>
       </button>
