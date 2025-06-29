@@ -6,6 +6,8 @@ import HomePage from "./pages/HomePage";
 import PricingPage from "./pages/PricingPage";
 import PropertySetupPage from "./pages/PropertySetupPage";
 import PropertyDetailsPage from "./pages/PropertyDetailsPage";
+import 'react-datepicker/dist/react-datepicker.css';
+
 
 function App() {
   return (
